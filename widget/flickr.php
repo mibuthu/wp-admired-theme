@@ -5,30 +5,30 @@
 class admired_flickr_widget extends WP_Widget {
 	function admired_flickr_widget() {
 		$widget_ops = array('classname' => 'admired_flickr_feed', 'description' => __('Displays your flickr photos', "admired") );
-		$this->WP_Widget('admired_flickr_feed', __('Admired - Flickr', "admired"), $widget_ops);	
+		parent::__construct('admired_flickr_feed', __('Admired - Flickr', "admired"), $widget_ops);
 	}
 
 	function widget($args, $instance) {
 		extract($args, EXTR_SKIP);
-		$title = empty($instance['title']) ? ' ' : apply_filters('widget_title', $instance['title']);	
+		$title = empty($instance['title']) ? ' ' : apply_filters('widget_title', $instance['title']);
 		$UserID = $instance['UserID'];
 		$Number = $instance['Number'];
 		$link = $instance['link'];
-		
+
 		echo $before_widget;
 	    if(!empty($title)) { echo $before_title . $title . $after_title; };
-		
+
 		$feed = "http://www.flickr.com/badge_code_v2.gne?count=" . $Number . "&display=latest&size=s&layout=x&source=user&user=" .$UserID;
-		
+
 		echo '<div id="flickr_tab">';
 		echo '<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=' . $Number . '&display=latest&size=s&layout=x&source=user&user=' .$UserID .'"></script>';
 		echo '</div>';
 
 		?>
 	    <p class="flickr-link"><a href="http://flickr.com/photos/<?php echo $UserID; ?>"><?php echo $link; ?></a></p>
-	  	<?php  
-		
-		echo $after_widget; 
+	  	<?php
+
+		echo $after_widget;
 	}
 
 	function form($instance) {
@@ -39,7 +39,7 @@ class admired_flickr_widget extends WP_Widget {
 		$link = strip_tags($instance['link']);
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', "admired"); ?>: 
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', "admired"); ?>:
 				<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($title); ?>" />
 			</label>
 		</p>
@@ -49,12 +49,12 @@ class admired_flickr_widget extends WP_Widget {
 			</label>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id('Number'); ?>"><?php _e('Number to Display', "admired"); ?>: 
+			<label for="<?php echo $this->get_field_id('Number'); ?>"><?php _e('Number to Display', "admired"); ?>:
 				<input class="widefat" id="<?php echo $this->get_field_id('Number'); ?>" name="<?php echo $this->get_field_name('Number'); ?>" type="text" value="<?php echo esc_attr($Number); ?>" />
 			</label>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id('link'); ?>"><?php _e('Link Text', "admired"); ?>: 
+			<label for="<?php echo $this->get_field_id('link'); ?>"><?php _e('Link Text', "admired"); ?>:
 				<input class="widefat" id="<?php echo $this->get_field_id('link'); ?>" name="<?php echo $this->get_field_name('link'); ?>" type="text" value="<?php echo esc_attr($link); ?>" />
 			</label>
 		</p>

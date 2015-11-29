@@ -8,45 +8,45 @@ $twitter_username = '';
 $twitter_tweetcount = 1;
 
 class admired_widget_twitter extends WP_Widget{
-	
+
 	function admired_widget_twitter(){
 		$widget_ops = array('classname' => 'admired-twitter', 'description' => __('Display your recent Twitter status.', 'admired'));
 		$control_ops = array('id_base' => 'admired-twitter');
-		$this->WP_Widget('admired-twitter', 'Admired Twitter Status', $widget_ops, $control_ops);
+		parent::__construct('admired-twitter', 'Admired Twitter Status', $widget_ops, $control_ops);
 	}
-	
-	function widget($args, $instance){	
+
+	function widget($args, $instance){
 		extract($args);
-		
+
 		// Selected settings
 		global $twitter_username;
 		global $twitter_tweetcount;
 		$twitter_title = $instance['twitter_title'];
 		$twitter_username = $instance['twitter_username'];
 		$twitter_tweetcount = $instance['twitter_tweetcount'];
-		
+
 		echo $args['before_widget'].$args['before_title'].$twitter_title.$args['after_title'];?>
         	<ul id="twitter_update_list" style="list-style:none; margin-left:3px; overflow:hidden; word-wrap: break-word;">
             	<li>&nbsp;</li>
             </ul>
             <p id="tweetfollow" class="sidebar_ablock"><a href="http://twitter.com/<?php echo $twitter_username; ?>"><?php _e('Follow me on Twitter', 'admired') ?></a></p>
-            
+
             <?php do_action('admired_twitter_widget'); ?>
         <?php echo $args['after_widget']; ?>
-        
+
         <?php
 		add_action('wp_footer', 'admired_add_twitter_script');
 	}
-	
+
 	function update($new_instance, $old_instance){
 		$instance = $old_instance;
 		$instance['twitter_username'] = strip_tags($new_instance['twitter_username']);
 		$instance['twitter_tweetcount'] = strip_tags($new_instance['twitter_tweetcount']);
 		$instance['twitter_title'] = strip_tags($new_instance['twitter_title']);
-		
+
 		return $instance;
 	}
-	
+
 	function form($instance){ // Defaults
 		$defaults = array(
 						'twitter_username' => 'wordpress',

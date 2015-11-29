@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Two column text widget class
  */
@@ -8,7 +8,7 @@ class admired_widget_text extends WP_Widget {
 		$widget_ops = array('classname' => 'admired_widget_text',
 		 'description' => __('Text Widget with Two Columns.','admired'));
 		$control_ops = array('width' => 400, 'height' => 350);
-		$this->WP_Widget('admired_text', __('Admired Text 2','admired'), $widget_ops, $control_ops);
+		parent::__construct('admired_text', __('Admired Text 2','admired'), $widget_ops, $control_ops);
 	}
 
 	function widget( $args, $instance ) {
