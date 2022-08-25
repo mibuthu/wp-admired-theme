@@ -4,7 +4,7 @@
  */
 class admired_widget_text extends WP_Widget {
 
-	function admired_widget_text() {
+	function __construct() {
 		$widget_ops = array('classname' => 'admired_widget_text',
 		 'description' => __('Text Widget with Two Columns.','admired'));
 		$control_ops = array('width' => 400, 'height' => 350);

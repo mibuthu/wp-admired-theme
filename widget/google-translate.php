@@ -5,7 +5,7 @@
 
 class admired_translate_widget extends WP_Widget {
 
-	function admired_translate_widget($skip_widget_init = false) {
+	function __construct($skip_widget_init = false) {
 		if (!$skip_widget_init) {
 			$widget_ops = array('classname' => __CLASS__, 'description' => __('Translate your site with Google.','admired') );
 			parent::__construct(__CLASS__, __('Admired Google Translator','admired'), $widget_ops);
